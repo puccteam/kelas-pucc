@@ -1,6 +1,10 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\file\FileInput;
+use marqu3s\summernote\Summernote;
+use marqu3s\summernote\SummernoteAsset;
+use marqu3s\summernote\SummernoteLanguageAsset;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Tutorial */
@@ -9,7 +13,7 @@ use yii\widgets\ActiveForm;
 
 <div class="tutorial-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
     <?= $form->field($model, 'Id')->textInput() ?>
 
@@ -19,11 +23,32 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'Nm_Artikel')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'Isi_Artikel')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'Isi_Artikel')->widget(Summernote::className(), [
+    
+    ]); ?>
 
     <?= $form->field($model, 'Status')->dropDownList([ 'Aktif' => 'Aktif', 'Nonaktif' => 'Nonaktif', ], ['prompt' => '']) ?>
 
-    <?= $form->field($model, 'Img_Artikel')->textInput(['maxlength' => true]) ?>
+    
+    <?php
+        echo $form->field($model, 'file')->widget(FileInput::classname(), [
+            'options' => ['accept' => 'image/*'],
+            'pluginOptions' => [
+                'showCaption' => false,
+                'showRemove' => false,
+                'showUpload' => false,
+                'browseClass' => 'btn btn-primary btn-block',
+                'browseIcon' => '<i class="glyphicon glyphicon-camera"></i> ',
+                'browseLabel' =>  'Pilih Gambar'
+            ],
+        ]);
+    ?>
+
+    <!-- <?php if ($model->Img_Artikel): ?> -->
+        <div class="form-group">
+            <?= Html::img(['/file', 'id' => $model->Img_Artikel],['class' => 'img-responsive']) ?>
+        </div>
+    <!-- <?php endif; ?> -->
 
   
 	<?php if (!Yii::$app->request->isAjax){ ?>

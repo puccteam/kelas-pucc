@@ -35,7 +35,7 @@ return [
         'class' => '\hscstudio\mimin\components\AccessControl',
         'allowActions' => [
             // add wildcard allowed action here!
-            // '*', // only in dev mode
+            '*', // only in dev mode
             'gii/*', // only in dev mode
             'site/*',
             'debug/*', 
@@ -48,5 +48,9 @@ return [
         ],
 
         'gridview' => ['class' => 'kartik\grid\Module']
+    ],
+
+     'controllerMap' => [
+        'file' => 'mdm\upload\FileController', // use to show or download file
     ],
 ];

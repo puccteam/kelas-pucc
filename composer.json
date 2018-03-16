@@ -20,7 +20,9 @@
         "yiisoft/yii2-swiftmailer": "~2.0.0 || ~2.1.0",
         "yiister/yii2-gentelella": "~1.0",
         "hscstudio/yii2-mimin": "~1.1.4",
-        "johnitvn/yii2-ajaxcrud": "*"
+        "johnitvn/yii2-ajaxcrud": "*",
+        "marqu3s/yii2-summernote": "dev-master",
+        "mdmsoft/yii2-upload-file": "~2.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

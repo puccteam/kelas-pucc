@@ -15,6 +15,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
 CrudAsset::register($this);
 
+$this->registerCss(".modal{overflow: auto}")
+
 ?>
 <div class="tutorial-index">
     <div id="ajaxCrudDatatable">
@@ -61,5 +63,6 @@ CrudAsset::register($this);
 <?php Modal::begin([
     "id"=>"ajaxCrudModal",
     "footer"=>"",// always need it for jquery plugin
+    "size" => "modal-lg"
 ])?>
 <?php Modal::end(); ?>

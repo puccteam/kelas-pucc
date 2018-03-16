@@ -101,15 +101,19 @@ class TutorialController extends Controller
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
         
                 ];         
-            }else if($model->load($request->post()) && $model->save()){
-                return [
-                    'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "Create new Tutorial",
-                    'content'=>'<span class="text-success">Create Tutorial success</span>',
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                            Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
-        
-                ];         
+            }else if($model->load($request->post()) && $model->validate()){
+                 if($model->saveUploadedFile() !== false){
+                    $model->save(false);
+                            
+                    return [
+                        'forceReload'=>'#crud-datatable-pjax',
+                        'title'=> "Create new Tutorial",
+                        'content'=>'<span class="text-success">Create Tutorial success</span>',
+                        'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
+            
+                    ]; 
+                }        
             }else{           
                 return [
                     'title'=> "Create new Tutorial",

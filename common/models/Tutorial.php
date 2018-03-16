@@ -34,7 +34,7 @@ class Tutorial extends \yii\db\ActiveRecord
             [['Id', 'Id_User', 'Id_Kategori'], 'required'],
             [['Isi_Artikel', 'Status'], 'string'],
             [['Id', 'Id_User', 'Id_Kategori'], 'string', 'max' => 4],
-            [['Nm_Artikel', 'Img_Artikel'], 'string', 'max' => 255],
+            [['Nm_Artikel'], 'string', 'max' => 255],
             [['Id', 'Id_User', 'Id_Kategori'], 'unique', 'targetAttribute' => ['Id', 'Id_User', 'Id_Kategori']],
         ];
     }
@@ -52,6 +52,22 @@ class Tutorial extends \yii\db\ActiveRecord
             'Isi_Artikel' => 'Isi  Artikel',
             'Status' => 'Status',
             'Img_Artikel' => 'Img  Artikel',
+        ];
+    }
+
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => 'mdm\upload\UploadBehavior',
+                'attribute' => 'file', // required, use to receive input file
+                'savedAttribute' => 'Img_Artikel', // optional, use to link model with saved file.
+                'uploadPath' => '@common/upload/Img_Artikel', // saved directory. default to '@runtime/upload'
+                'autoSave' => true, // when true then uploaded file will be save before ActiveRecord::save()
+                'autoDelete' => true, // when true then uploaded file will deleted before ActiveRecord::delete()
+                'deleteOldFile' => true,
+                'directoryLevel' => 0
+            ],
         ];
     }
 }

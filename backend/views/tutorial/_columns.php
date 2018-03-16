@@ -1,5 +1,6 @@
 <?php
 use yii\helpers\Url;
+use yii\helpers\HtmlPurifier;
 
 return [
     [
@@ -26,10 +27,17 @@ return [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'Nm_Artikel',
     ],
-    [
-        'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'Isi_Artikel',
-    ],
+    // [
+    //     'class'=>'\kartik\grid\DataColumn',
+    //     'format' => 'raw',
+    //     'attribute'=>'Isi_Artikel',
+        // 'value' => function($model){
+        //     $text = HtmlPurifier::process($model->Isi_Artikel, [
+        //     'Attr.EnableID' => true,
+        // ]);
+        //     return $text;
+        // }
+    // ],
     // [
         // 'class'=>'\kartik\grid\DataColumn',
         // 'attribute'=>'Status',
@@ -43,7 +51,7 @@ return [
         'dropdown' => false,
         'vAlign'=>'middle',
         'urlCreator' => function($action, $model, $key, $index) { 
-                return Url::to([$action,'Id, $Id_User, $Id_Kategori'=>$key]);
+                return Url::to([$action,'Id' => $model->Id, 'Id_User' => $model->Id_User, 'Id_Kategori' => $model->Id_Kategori]);
         },
         'viewOptions'=>['role'=>'modal-remote','title'=>'View','data-toggle'=>'tooltip'],
         'updateOptions'=>['role'=>'modal-remote','title'=>'Update', 'data-toggle'=>'tooltip'],
