@@ -19,15 +19,26 @@ return [
         'menu' => [
             'class' => 'common\componen\Menu',
         ],
+
+        'user' => [
+            'identityClass' => 'common\models\User',
+            'enableAutoLogin' => true,
+            'identityCookie' => ['name' => '_identity-common', 'httpOnly' => true],
+        ],
+        'session' => [
+            // this is the name of the session cookie used for login on the frontend
+            'name' => 'advanced-common',
+        ],
         
     ],
     'as access' => [
         'class' => '\hscstudio\mimin\components\AccessControl',
         'allowActions' => [
             // add wildcard allowed action here!
-            // '*',
+            // '*', // only in dev mode
+            'gii/*', // only in dev mode
             'site/*',
-            'debug/*',
+            'debug/*', 
             'mimin/*', // only in dev mode
         ],
     ],
@@ -35,5 +46,7 @@ return [
         'mimin' => [
             'class' => '\hscstudio\mimin\Module',
         ],
+
+        'gridview' => ['class' => 'kartik\grid\Module']
     ],
 ];

@@ -22,16 +22,14 @@ class Pengaturan extends Component {
 
   	public function getMenu($menuItems){
   		$menuItems = Mimin::filterMenu($menuItems);
-  		echo '<ul class="main-menu">';
+  		echo '<ul class="nav side-menu">';
   		foreach ($menuItems as $items) {
   			if (isset($items['items'])){
   				echo '<li class="has-sub-menu">';
   				echo '<a href="#">
-				      <div class="icon-w">
-				        <div class="os-icon os-icon-window-content"></div>
-				      </div>
-				      <span>'.$items['label'].'</span></a>';
-				echo '<ul class="sub-menu">';
+				        <i class="fa fa-edit"></i>
+				      <span>'.$items['label'].'</span><span class="fa fa-chevron-down"></span></a>';
+				echo '<ul class="nav child_menu">';
 				foreach ($items['items'] as $items2) {
 					echo '<li class="sub-menu">
 					        <a href="'.Url::to($items2['url']).'">
@@ -49,6 +47,7 @@ class Pengaturan extends Component {
   			}
   			echo '</li>';
   		}
+  		echo '</ul>';
   	}
 
 }

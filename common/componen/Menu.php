@@ -18,7 +18,7 @@ class Menu extends Component {
             [   'label' => 'Unit', 
                 'items' => [
                     ['label' => 'Unit', 'url' => ['/unit/']],
-                    ['label' => 'Sub Unit', 'url' => ['/sub-unit/']],
+                    ['label' => 'Sub Unit', 'url' => ['/kategori-tutorial/']],
                     ['label' => 'Sub Sub Unit', 'url' => ['/sub-sub-unit/']],
                  ],
             ],
