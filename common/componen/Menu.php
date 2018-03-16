@@ -15,11 +15,10 @@ class Menu extends Component {
     public function getSotk(){
         $menuItems = [
             ['label' => 'Dashboard', 'url' => ['/site/']],
-            [   'label' => 'Unit', 
+            [   'label' => 'Tutorial', 
                 'items' => [
-                    ['label' => 'Unit', 'url' => ['/unit/']],
-                    ['label' => 'Sub Unit', 'url' => ['/kategori-tutorial/']],
-                    ['label' => 'Sub Sub Unit', 'url' => ['/sub-sub-unit/']],
+                    ['label' => 'Kategori', 'url' => ['/kategori-tutorial/']],
+                    ['label' => 'Tutorial', 'url' => ['/tutorial/']],
                  ],
             ],
             [   'label' => 'Tupoksi', 
