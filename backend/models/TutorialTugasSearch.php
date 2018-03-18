@@ -5,12 +5,12 @@ namespace backend\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Tutorial;
+use common\models\SubTutorialTugas;
 
 /**
- * TutorialSearch represents the model behind the search form about `common\models\Tutorial`.
+ * TutorialTugasSearch represents the model behind the search form about `common\models\SubTutorialTugas`.
  */
-class TutorialSearch extends Tutorial
+class TutorialTugasSearch extends SubTutorialTugas
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class TutorialSearch extends Tutorial
     public function rules()
     {
         return [
-            [['Id', 'Id_Kategori', 'Id_User'], 'integer'],
-            [['Judul_Tutorial', 'Status'], 'safe'],
+            [['Id', 'Id_Kategori', 'Id_User', 'Copy_Soal'], 'integer'],
+            [['Soal', 'Status'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class TutorialSearch extends Tutorial
      */
     public function search($params)
     {
-        $query = Tutorial::find();
+        $query = SubTutorialTugas::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -59,17 +59,20 @@ class TutorialSearch extends Tutorial
             'Id' => $this->Id,
             'Id_Kategori' => $this->Id_Kategori,
             'Id_User' => $this->Id_User,
+            'Copy_Soal' => $this->Copy_Soal,
         ]);
 
-        $query->andFilterWhere(['like', 'Judul_Tutorial', $this->Judul_Tutorial])
+        $query->andFilterWhere(['like', 'Soal', $this->Soal])
             ->andFilterWhere(['like', 'Status', $this->Status]);
 
         $request = Yii::$app->request;
         $Id = $request->get('Id');
+        $Id_Kategori = $request->get('Id_Kategori');
 
         $query->andFilterWhere([
-            'Id_Kategori' => $Id,
-        ]);     
+            'Id_Kategori' => $Id_Kategori,
+            'Id' => $Id,
+        ]); 
 
         return $dataProvider;
     }

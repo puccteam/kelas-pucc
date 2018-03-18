@@ -5,12 +5,12 @@ namespace backend\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Tutorial;
+use common\models\SubTutorialText;
 
 /**
  * TutorialSearch represents the model behind the search form about `common\models\Tutorial`.
  */
-class TutorialSearch extends Tutorial
+class TutorialTextSearch extends SubTutorialText
 {
     /**
      * @inheritdoc
@@ -18,8 +18,7 @@ class TutorialSearch extends Tutorial
     public function rules()
     {
         return [
-            [['Id', 'Id_Kategori', 'Id_User'], 'integer'],
-            [['Judul_Tutorial', 'Status'], 'safe'],
+            [['Id', 'Id_User', 'Id_Kategori', 'Nm_Artikel', 'Isi_Artikel', 'Status', 'Img_Artikel'], 'safe'],
         ];
     }
 
@@ -41,7 +40,7 @@ class TutorialSearch extends Tutorial
      */
     public function search($params)
     {
-        $query = Tutorial::find();
+        $query = SubTutorialText::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -55,21 +54,23 @@ class TutorialSearch extends Tutorial
             return $dataProvider;
         }
 
-        $query->andFilterWhere([
-            'Id' => $this->Id,
-            'Id_Kategori' => $this->Id_Kategori,
-            'Id_User' => $this->Id_User,
-        ]);
+        $query->andFilterWhere(['like', 'Id', $this->Id])
+            ->andFilterWhere(['like', 'Id_User', $this->Id_User])
+            ->andFilterWhere(['like', 'Id_Kategori', $this->Id_Kategori])
+            ->andFilterWhere(['like', 'Nm_Artikel', $this->Nm_Artikel])
+            ->andFilterWhere(['like', 'Isi_Artikel', $this->Isi_Artikel])
+            ->andFilterWhere(['like', 'Status', $this->Status])
+            ->andFilterWhere(['like', 'Img_Artikel', $this->Img_Artikel]);
 
-        $query->andFilterWhere(['like', 'Judul_Tutorial', $this->Judul_Tutorial])
-            ->andFilterWhere(['like', 'Status', $this->Status]);
 
         $request = Yii::$app->request;
         $Id = $request->get('Id');
+        $Id_Kategori = $request->get('Id_Kategori');
 
         $query->andFilterWhere([
-            'Id_Kategori' => $Id,
-        ]);     
+            'Id_Kategori' => $Id_Kategori,
+            'Id' => $Id,
+        ]); 
 
         return $dataProvider;
     }

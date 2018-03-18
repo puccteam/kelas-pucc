@@ -5,12 +5,12 @@ namespace backend\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Tutorial;
+use common\models\SubTutorialVideo;
 
 /**
- * TutorialSearch represents the model behind the search form about `common\models\Tutorial`.
+ * TutorialVideoSearch represents the model behind the search form about `common\models\SubTutorialVideo`.
  */
-class TutorialSearch extends Tutorial
+class TutorialVideoSearch extends SubTutorialVideo
 {
     /**
      * @inheritdoc
@@ -19,7 +19,7 @@ class TutorialSearch extends Tutorial
     {
         return [
             [['Id', 'Id_Kategori', 'Id_User'], 'integer'],
-            [['Judul_Tutorial', 'Status'], 'safe'],
+            [['Url_Video', 'Status'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class TutorialSearch extends Tutorial
      */
     public function search($params)
     {
-        $query = Tutorial::find();
+        $query = SubTutorialVideo::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -61,16 +61,17 @@ class TutorialSearch extends Tutorial
             'Id_User' => $this->Id_User,
         ]);
 
-        $query->andFilterWhere(['like', 'Judul_Tutorial', $this->Judul_Tutorial])
+        $query->andFilterWhere(['like', 'Url_Video', $this->Url_Video])
             ->andFilterWhere(['like', 'Status', $this->Status]);
-
+        
         $request = Yii::$app->request;
         $Id = $request->get('Id');
+        $Id_Kategori = $request->get('Id_Kategori');
 
         $query->andFilterWhere([
-            'Id_Kategori' => $Id,
-        ]);     
-
+            'Id_Kategori' => $Id_Kategori,
+            'Id' => $Id,
+        ]); 
         return $dataProvider;
     }
 }

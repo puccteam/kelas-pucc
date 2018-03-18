@@ -7,16 +7,18 @@ use johnitvn\ajaxcrud\CrudAsset;
 use johnitvn\ajaxcrud\BulkButtonWidget;
 
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\KategoriTutorialSearch */
+/* @var $searchModel backend\models\TutorialSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Kategori Tutorials';
+$this->title = 'Tutorials';
 $this->params['breadcrumbs'][] = $this->title;
 
 CrudAsset::register($this);
 
+$this->registerCss(".modal{overflow: auto}")
+
 ?>
-<div class="kategori-tutorial-index">
+<div class="tutorial-index">
     <div id="ajaxCrudDatatable">
         <?=GridView::widget([
             'id'=>'crud-datatable',
@@ -25,9 +27,9 @@ CrudAsset::register($this);
             'pjax'=>true,
             'columns' => require(__DIR__.'/_columns.php'),
             'toolbar'=> [
-                ['content'=>
-                    Html::a('<i class="glyphicon glyphicon-plus"></i>', ['create'],
-                    ['role'=>'modal-remote','title'=> 'Create new Kategori Tutorials','class'=>'btn btn-default']).
+                ['content'=>($model->aksesTambah) ?
+                    Html::a('<i class="glyphicon glyphicon-plus"></i> Tambah Tutorial Text', ['create', 'Id' => $Id, 'Id_Kategori' => $Id_Kategori],
+                    ['role'=>'modal-remote','title'=> 'Create new Tutorials','class'=>'btn btn-default']) : ' '.
                     Html::a('<i class="glyphicon glyphicon-repeat"></i>', [''],
                     ['data-pjax'=>1, 'class'=>'btn btn-default', 'title'=>'Reset Grid']).
                     '{toggleData}'.
@@ -39,7 +41,7 @@ CrudAsset::register($this);
             'responsive' => true,          
             'panel' => [
                 // 'type' => 'primary', 
-                // 'heading' => '<i class="glyphicon glyphicon-list"></i> Kategori Tutorials listing',
+                // 'heading' => '<i class="glyphicon glyphicon-list"></i> Tutorials listing',
                 // 'before'=>'<em>* Resize table columns just like a spreadsheet by dragging the column edges.</em>',
                 // 'after'=>BulkButtonWidget::widget([
                 //             'buttons'=>Html::a('<i class="glyphicon glyphicon-trash"></i>&nbsp; Delete All',
@@ -61,5 +63,6 @@ CrudAsset::register($this);
 <?php Modal::begin([
     "id"=>"ajaxCrudModal",
     "footer"=>"",// always need it for jquery plugin
+    "size" => "modal-lg"
 ])?>
 <?php Modal::end(); ?>

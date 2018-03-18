@@ -11,8 +11,6 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'Id_User')->textInput() ?>
-
     <?= $form->field($model, 'Nm_Kategori')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'Status')->dropDownList([ 'aktif' => 'Aktif', 'nonaktif' => 'Nonaktif', ], ['prompt' => '']) ?>

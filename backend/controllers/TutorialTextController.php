@@ -3,8 +3,8 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\KategoriTutorial;
-use backend\models\KategoriTutorialSearch;
+use common\models\SubTutorialText;
+use backend\models\TutorialTextSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -12,9 +12,9 @@ use \yii\web\Response;
 use yii\helpers\Html;
 
 /**
- * KategoriTutorialController implements the CRUD actions for KategoriTutorial model.
+ * TutorialController implements the CRUD actions for Tutorial model.
  */
-class KategoriTutorialController extends Controller
+class TutorialTextController extends Controller
 {
     /**
      * @inheritdoc
@@ -33,61 +33,69 @@ class KategoriTutorialController extends Controller
     }
 
     /**
-     * Lists all KategoriTutorial models.
+     * Lists all Tutorial models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($Id, $Id_Kategori)
     {    
-        $searchModel = new KategoriTutorialSearch();
+        $searchModel = new TutorialTextSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        $model = new SubTutorialText;
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'model' => $model,
+            'Id' => $Id,
+            'Id_Kategori' => $Id_Kategori
         ]);
     }
 
 
     /**
-     * Displays a single KategoriTutorial model.
+     * Displays a single Tutorial model.
      * @param integer $Id
      * @param integer $Id_User
+     * @param integer $Id_Kategori
      * @return mixed
      */
-    public function actionView($Id, $Id_User)
+    public function actionView($Id, $Id_User, $Id_Kategori)
     {   
         $request = Yii::$app->request;
-     
         if($request->isAjax){
             Yii::$app->response->format = Response::FORMAT_JSON;
             return [
-                    'title'=> "KategoriTutorial #".$Id, $Id_User,
+                    'title'=> "Tutorial #".$Id, $Id_User, $Id_Kategori,
                     'content'=>$this->renderAjax('view', [
-                        'model' => $this->findModel($Id, $Id_User),
+                        'model' => $this->findModel($Id, $Id_User, $Id_Kategori),
                     ]),
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                            Html::a('Edit',['update','Id, $Id_User'=>$Id, $Id_User],['class'=>'btn btn-primary','role'=>'modal-remote'])
+                            Html::a('Edit',['update','Id, $Id_User, $Id_Kategori'=>$Id, $Id_User, $Id_Kategori],['class'=>'btn btn-primary','role'=>'modal-remote'])
                 ];    
         }else{
             return $this->render('view', [
-                'model' => $this->findModel($Id, $Id_User),
+                'model' => $this->findModel($Id, $Id_User, $Id_Kategori),
             ]);
         }
     }
 
     /**
-     * Creates a new KategoriTutorial model.
+     * Creates a new Tutorial model.
      * For ajax request will return json object
      * and for non-ajax request if creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($Id, $Id_Kategori)
     {
         $request = Yii::$app->request;
-        $model = new KategoriTutorial();  
+        $model = new SubTutorialText();  
 
         $id_user = Yii::$app->user->getId();
+
         $model->Id_User = $id_user;
+        $model->Id = $Id;     
+        $model->Id_Kategori = $Id_Kategori;     
 
         if($request->isAjax){
             /*
@@ -96,7 +104,7 @@ class KategoriTutorialController extends Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             if($request->isGet){
                 return [
-                    'title'=> "Create new KategoriTutorial",
+                    'title'=> "Create new Tutorial",
                     'content'=>$this->renderAjax('create', [
                         'model' => $model,
                     ]),
@@ -104,18 +112,22 @@ class KategoriTutorialController extends Controller
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
         
                 ];         
-            }else if($model->load($request->post()) && $model->save()){
-                return [
-                    'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "Create new KategoriTutorial",
-                    'content'=>'<span class="text-success">Create KategoriTutorial success</span>',
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                            Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
-        
-                ];         
+            }else if($model->load($request->post()) && $model->validate()){
+                 if($model->saveUploadedFile() !== false){
+                    $model->save(false);
+                            
+                    return [
+                        'forceReload'=>'#crud-datatable-pjax',
+                        'title'=> "Create new Tutorial",
+                        'content'=>'<span class="text-success">Create Tutorial success</span>',
+                        'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
+            
+                    ]; 
+                }        
             }else{           
                 return [
-                    'title'=> "Create new KategoriTutorial",
+                    'title'=> "Create new Tutorial",
                     'content'=>$this->renderAjax('create', [
                         'model' => $model,
                     ]),
@@ -128,8 +140,11 @@ class KategoriTutorialController extends Controller
             /*
             *   Process for non-ajax request
             */
-            if ($model->load($request->post()) && $model->save()) {
-                return $this->redirect(['view', 'Id' => $model->Id, 'Id_User' => $model->Id_User]);
+            if ($model->load($request->post()) && $model->validate()) {
+                if($model->saveUploadedFile() !== false){
+                    $model->save(false);
+                    return $this->redirect(['view', 'Id' => $model->Id, 'Id_User' => $model->Id_User, 'Id_Kategori' => $model->Id_Kategori]);
+                }
             } else {
                 return $this->render('create', [
                     'model' => $model,
@@ -140,17 +155,18 @@ class KategoriTutorialController extends Controller
     }
 
     /**
-     * Updates an existing KategoriTutorial model.
+     * Updates an existing Tutorial model.
      * For ajax request will return json object
      * and for non-ajax request if update is successful, the browser will be redirected to the 'view' page.
      * @param integer $Id
      * @param integer $Id_User
+     * @param integer $Id_Kategori
      * @return mixed
      */
-    public function actionUpdate($Id, $Id_User)
+    public function actionUpdate($Id, $Id_User, $Id_Kategori)
     {
         $request = Yii::$app->request;
-        $model = $this->findModel($Id, $Id_User);       
+        $model = $this->findModel($Id, $Id_User, $Id_Kategori);       
 
         if($request->isAjax){
             /*
@@ -159,7 +175,7 @@ class KategoriTutorialController extends Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             if($request->isGet){
                 return [
-                    'title'=> "Update KategoriTutorial #".$Id, $Id_User,
+                    'title'=> "Update Tutorial #".$Id, $Id_User, $Id_Kategori,
                     'content'=>$this->renderAjax('update', [
                         'model' => $model,
                     ]),
@@ -169,16 +185,16 @@ class KategoriTutorialController extends Controller
             }else if($model->load($request->post()) && $model->save()){
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "KategoriTutorial #".$Id, $Id_User,
+                    'title'=> "Tutorial #".$Id, $Id_User, $Id_Kategori,
                     'content'=>$this->renderAjax('view', [
                         'model' => $model,
                     ]),
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                            Html::a('Edit',['update','Id, $Id_User'=>$Id, $Id_User],['class'=>'btn btn-primary','role'=>'modal-remote'])
+                            Html::a('Edit',['update','Id, $Id_User, $Id_Kategori'=>$Id, $Id_User, $Id_Kategori],['class'=>'btn btn-primary','role'=>'modal-remote'])
                 ];    
             }else{
                  return [
-                    'title'=> "Update KategoriTutorial #".$Id, $Id_User,
+                    'title'=> "Update Tutorial #".$Id, $Id_User, $Id_Kategori,
                     'content'=>$this->renderAjax('update', [
                         'model' => $model,
                     ]),
@@ -191,7 +207,7 @@ class KategoriTutorialController extends Controller
             *   Process for non-ajax request
             */
             if ($model->load($request->post()) && $model->save()) {
-                return $this->redirect(['view', 'Id' => $model->Id, 'Id_User' => $model->Id_User]);
+                return $this->redirect(['view', 'Id' => $model->Id, 'Id_User' => $model->Id_User, 'Id_Kategori' => $model->Id_Kategori]);
             } else {
                 return $this->render('update', [
                     'model' => $model,
@@ -201,17 +217,18 @@ class KategoriTutorialController extends Controller
     }
 
     /**
-     * Delete an existing KategoriTutorial model.
+     * Delete an existing Tutorial model.
      * For ajax request will return json object
      * and for non-ajax request if deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $Id
      * @param integer $Id_User
+     * @param integer $Id_Kategori
      * @return mixed
      */
-    public function actionDelete($Id, $Id_User)
+    public function actionDelete($Id, $Id_User, $Id_Kategori)
     {
         $request = Yii::$app->request;
-        $this->findModel($Id, $Id_User)->delete();
+        $this->findModel($Id, $Id_User, $Id_Kategori)->delete();
 
         if($request->isAjax){
             /*
@@ -230,11 +247,12 @@ class KategoriTutorialController extends Controller
     }
 
      /**
-     * Delete multiple existing KategoriTutorial model.
+     * Delete multiple existing Tutorial model.
      * For ajax request will return json object
      * and for non-ajax request if deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $Id
      * @param integer $Id_User
+     * @param integer $Id_Kategori
      * @return mixed
      */
     public function actionBulkDelete()
@@ -262,16 +280,17 @@ class KategoriTutorialController extends Controller
     }
 
     /**
-     * Finds the KategoriTutorial model based on its primary key value.
+     * Finds the Tutorial model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $Id
      * @param integer $Id_User
-     * @return KategoriTutorial the loaded model
+     * @param integer $Id_Kategori
+     * @return Tutorial the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($Id, $Id_User)
+    protected function findModel($Id, $Id_User, $Id_Kategori)
     {
-        if (($model = KategoriTutorial::findOne(['Id' => $Id, 'Id_User' => $Id_User])) !== null) {
+        if (($model = SubTutorialText::findOne(['Id' => $Id, 'Id_User' => $Id_User, 'Id_Kategori' => $Id_Kategori])) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

@@ -1,12 +1,8 @@
 <?php
 use yii\helpers\Url;
-use yii\helpers\HtmlPurifier;
+use yii\helpers\Html;
 
 return [
-    [
-        'class' => 'kartik\grid\CheckboxColumn',
-        'width' => '20px',
-    ],
     [
         'class' => 'kartik\grid\SerialColumn',
         'width' => '30px',
@@ -15,43 +11,59 @@ return [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'Id',
     ],
-    [
-        'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'Id_User',
-    ],
-    [
-        'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'Id_Kategori',
-    ],
-    [
-        'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'Nm_Artikel',
-    ],
     // [
     //     'class'=>'\kartik\grid\DataColumn',
-    //     'format' => 'raw',
-    //     'attribute'=>'Isi_Artikel',
-        // 'value' => function($model){
-        //     $text = HtmlPurifier::process($model->Isi_Artikel, [
-        //     'Attr.EnableID' => true,
-        // ]);
-        //     return $text;
-        // }
+    //     'attribute'=>'Id_Kategori',
     // ],
     // [
-        // 'class'=>'\kartik\grid\DataColumn',
-        // 'attribute'=>'Status',
+    //     'class'=>'\kartik\grid\DataColumn',
+    //     'attribute'=>'Id_User',
     // ],
-    // [
-        // 'class'=>'\kartik\grid\DataColumn',
-        // 'attribute'=>'Img_Artikel',
-    // ],
+    [
+        'class'=>'\kartik\grid\DataColumn',
+        'attribute'=>'Judul_Tutorial',
+    ],
+    [
+        'class'=>'\kartik\grid\DataColumn',
+        'attribute'=>'Status',
+    ],
+
+    [
+        'class' => 'kartik\grid\ActionColumn',
+        'header' => 'Text',
+        'template' => '{TutorialText}',
+        'buttons' => [
+            "TutorialText" => function ($url, $model, $key) {
+                return Html::a('Text', ['tutorial-text/index', 'Id' => $model->Id, 'Id_Kategori' => $model->Id_Kategori], ['class' => 'btn btn-primary', 'data-pjax' => '0']);
+            }
+        ]
+    ],
+    [
+        'class' => 'kartik\grid\ActionColumn',
+        'header' => 'Video',
+        'template' => '{TutorialVideo}',
+        'buttons' => [
+            "TutorialVideo" => function ($url, $model, $key) {
+                return Html::a('Video', ['tutorial-video/index', 'Id' => $model->Id, 'Id_Kategori' => $model->Id_Kategori], ['class' => 'btn btn-primary', 'data-pjax' => '0']);
+            }
+        ]
+    ],
+    [
+        'class' => 'kartik\grid\ActionColumn',
+        'header' => 'Tugas',
+        'template' => '{TutorialTugas}',
+        'buttons' => [
+            "TutorialTugas" => function ($url, $model, $key) {
+                return Html::a('Tugas', ['tutorial-tugas/index', 'Id' => $model->Id, 'Id_Kategori' => $model->Id_Kategori], ['class' => 'btn btn-primary', 'data-pjax' => '0']);
+            }
+        ]
+    ],
     [
         'class' => 'kartik\grid\ActionColumn',
         'dropdown' => false,
         'vAlign'=>'middle',
         'urlCreator' => function($action, $model, $key, $index) { 
-                return Url::to([$action,'Id' => $model->Id, 'Id_User' => $model->Id_User, 'Id_Kategori' => $model->Id_Kategori]);
+                return Url::to([$action,'Id' => $model->Id, 'Id_Kategori' => $model->Id_Kategori, 'Id_User' => $model->Id_User]);
         },
         'viewOptions'=>['role'=>'modal-remote','title'=>'View','data-toggle'=>'tooltip'],
         'updateOptions'=>['role'=>'modal-remote','title'=>'Update', 'data-toggle'=>'tooltip'],

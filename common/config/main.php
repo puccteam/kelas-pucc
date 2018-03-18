@@ -20,6 +20,13 @@ return [
             'class' => 'common\componen\Menu',
         ],
 
+        'urlManagerFrontEnd' => [
+            'class' => 'yii\web\urlManager',
+            'baseUrl' => '',
+            'enablePrettyUrl' => false,
+            'showScriptName' => false,
+        ],
+
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
@@ -35,7 +42,7 @@ return [
         'class' => '\hscstudio\mimin\components\AccessControl',
         'allowActions' => [
             // add wildcard allowed action here!
-            '*', // only in dev mode
+            //'*', // only in dev mode
             'gii/*', // only in dev mode
             'site/*',
             'debug/*', 

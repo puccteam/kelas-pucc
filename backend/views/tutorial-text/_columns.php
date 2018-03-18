@@ -1,6 +1,6 @@
 <?php
 use yii\helpers\Url;
-use yii\helpers\Html;
+use yii\helpers\HtmlPurifier;
 
 return [
     // [
@@ -11,39 +11,50 @@ return [
         'class' => 'kartik\grid\SerialColumn',
         'width' => '30px',
     ],
-    //     [
-    //     'class'=>'\kartik\grid\DataColumn',
-    //     'attribute'=>'Id',
-    // ],
+        [
+        'class'=>'\kartik\grid\DataColumn',
+        'header' => 'Judul Tutorial Text',
+        'attribute'=>'Id',
+        'value' => 'judulTutorial.Judul_Tutorial'
+    ],
     // [
     //     'class'=>'\kartik\grid\DataColumn',
     //     'attribute'=>'Id_User',
     // ],
+    // [
+    //     'class'=>'\kartik\grid\DataColumn',
+    //     'attribute'=>'Id_Kategori',
+    // ],
+    // [
+    //     'class'=>'\kartik\grid\DataColumn',
+    //     'header' => 'Judul Tutorial',
+    //     'attribute'=>'Nm_Artikel',
+    // ],
     [
         'class'=>'\kartik\grid\DataColumn',
-        'header' => 'Judul Kategori Tutorial',
-        'attribute'=>'Nm_Kategori',
+        'format' => 'raw',
+        'attribute'=>'Isi_Artikel',
+        // 'value' => function($model){
+        //     $text = HtmlPurifier::process($model->Isi_Artikel, [
+        //     'Attr.EnableID' => true,
+        // ]);
+        //     return $text;
+        // }
     ],
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'Status',
     ],
-    [
-        'class' => 'kartik\grid\ActionColumn',
-        'header' => 'Tutorial',
-        'template' => '{Tutorial}',
-        'buttons' => [
-            "Tutorial" => function ($url, $model, $key) {
-                return Html::a('Tutorial', ['tutorial/index', 'Id' => $model->Id], ['class' => 'btn btn-primary', 'data-pjax' => '0']);
-            }
-        ]
-    ],
+    // [
+        // 'class'=>'\kartik\grid\DataColumn',
+        // 'attribute'=>'Img_Artikel',
+    // ],
     [
         'class' => 'kartik\grid\ActionColumn',
         'dropdown' => false,
         'vAlign'=>'middle',
         'urlCreator' => function($action, $model, $key, $index) { 
-                return Url::to([$action,'Id' => $model->Id, 'Id_User' => $model->Id_User]);
+                return Url::to([$action,'Id' => $model->Id, 'Id_User' => $model->Id_User, 'Id_Kategori' => $model->Id_Kategori]);
         },
         'viewOptions'=>['role'=>'modal-remote','title'=>'View','data-toggle'=>'tooltip'],
         'updateOptions'=>['role'=>'modal-remote','title'=>'Update', 'data-toggle'=>'tooltip'],

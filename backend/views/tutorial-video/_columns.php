@@ -1,19 +1,20 @@
 <?php
 use yii\helpers\Url;
-use yii\helpers\Html;
 
 return [
-    // [
-    //     'class' => 'kartik\grid\CheckboxColumn',
-    //     'width' => '20px',
-    // ],
     [
         'class' => 'kartik\grid\SerialColumn',
         'width' => '30px',
     ],
-    //     [
+        [
+        'class'=>'\kartik\grid\DataColumn',
+        'header' => 'Judul Tutorial Text',
+        'attribute'=>'Id',
+        'value' => 'judulTutorial.Judul_Tutorial'
+    ],
+    // [
     //     'class'=>'\kartik\grid\DataColumn',
-    //     'attribute'=>'Id',
+    //     'attribute'=>'Id_Kategori',
     // ],
     // [
     //     'class'=>'\kartik\grid\DataColumn',
@@ -21,8 +22,7 @@ return [
     // ],
     [
         'class'=>'\kartik\grid\DataColumn',
-        'header' => 'Judul Kategori Tutorial',
-        'attribute'=>'Nm_Kategori',
+        'attribute'=>'Url_Video',
     ],
     [
         'class'=>'\kartik\grid\DataColumn',
@@ -30,20 +30,10 @@ return [
     ],
     [
         'class' => 'kartik\grid\ActionColumn',
-        'header' => 'Tutorial',
-        'template' => '{Tutorial}',
-        'buttons' => [
-            "Tutorial" => function ($url, $model, $key) {
-                return Html::a('Tutorial', ['tutorial/index', 'Id' => $model->Id], ['class' => 'btn btn-primary', 'data-pjax' => '0']);
-            }
-        ]
-    ],
-    [
-        'class' => 'kartik\grid\ActionColumn',
         'dropdown' => false,
         'vAlign'=>'middle',
         'urlCreator' => function($action, $model, $key, $index) { 
-                return Url::to([$action,'Id' => $model->Id, 'Id_User' => $model->Id_User]);
+                return Url::to([$action,'Id' => $model->Id, 'Id_User' => $model->Id_User, 'Id_Kategori' => $model->Id_Kategori]);
         },
         'viewOptions'=>['role'=>'modal-remote','title'=>'View','data-toggle'=>'tooltip'],
         'updateOptions'=>['role'=>'modal-remote','title'=>'Update', 'data-toggle'=>'tooltip'],
