@@ -1,0 +1,502 @@
+/*warna*/
+.biru-primary{  color: #292562; }
+.pink-primary{  color: #ee2760; }
+.biru-gelap{ color: #202032; }
+.putih{ color: #ffffff; }
+
+.fa-bars{
+  color: #202032;
+}
+
+a:hover{
+  text-decoration: none;
+}
+
+li{
+list-style: none;
+}
+
+.jumbotron{
+background: url("../img/coverv2.png") center;
+background-repeat: no-repeat;
+background-size: cover;
+/*background-position: 0 70%;*/
+height: 725px;
+position: relative;
+background-attachment: fixed;
+}
+
+.content-landing{
+position: absolute;
+top: 100px;
+color: white;
+}
+
+nav ul a li{float: left;line-height: 56px;padding: 1.5px 25px;color: #292562;font-size: 21px;}
+
+nav ul a li:hover{
+  color: #ee2760;
+  border-bottom: 3px solid;
+}
+
+.asap {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+}
+
+.asap img { width: 100%; }
+
+section{
+min-height: 725px;
+overflow: hidden
+}
+
+.logo{color: #292562;}
+
+.float-right{  float: right; }
+
+.float-left{ float: left; }
+
+.section-roket{ min-height: 725px; width: 100%; }
+
+.roket{
+position: absolute;
+bottom: 0px;
+right: 99px;
+width: 315px;
+}
+
+.content-landing a {
+    color:  white;
+    border: 2px solid white;
+    padding:  11px 25px;
+    border-radius:  5px;
+    margin: 5px;
+    font-weight:  bold;
+}
+
+.content-landing a:hover {
+    background:  white;
+    color: #212032;
+}
+
+.content-landing h1 {
+    font-size: 85px;
+}
+
+.content-landing p {
+    font-size: 23px;
+}
+
+.carousel-indicators li{
+background-color: rgb(156, 156, 156);
+width: 15px;
+height: 15px;
+}
+
+.carousel-indicators .active{
+background-color: #27c0d2;
+width: 18px;
+height: 18px
+}
+
+.header-fixed{
+position: fixed;
+width: 100%;
+top: 0px;
+height: 61px;
+line-height: 51px;
+display: block;
+z-index: 100;
+background-color: #ffffff;
+}
+
+header i.fa.fa-bars {
+  display: none;
+  font-size: 35px;
+  line-height: 61px;
+}
+
+.clear{ clear: both; }
+
+#about{
+background-image: url("../img/team.png");
+background-repeat: no-repeat;
+background-position: 50% 100%;
+}
+
+#about{ min-height: 585px; }
+
+#about h3, #service h3, #portfolio h3, #contact h3 {
+  font-size: 35px;
+  font-weight: bold;
+}
+
+#about p { text-align: center; font-size: 17px; }
+
+hr {
+  width: 75px;
+  margin-left: 3px;
+  border-top: 3px solid #ee2760;
+  margin-top: 0px;
+}
+
+.btn-selengkapnya a {
+  color: #ee2760;
+  padding: 5px 15px;
+  border: 2px solid;
+  border-radius: 5px;
+}
+
+.btn-selengkapnya a:hover{
+text-decoration: none;
+}
+
+#service{ background-color: #212032; padding-bottom: 25px;}
+
+.service-item h4 { color: #ee2760;}
+
+.service-item p { color: #ffffff; font-size: 15px; }
+
+.service-item a {color: #27c0d2;border: 3px solid}
+
+.service-item { padding: 15px; }
+
+.main-container{ width: 100%; overflow: hidden; }
+
+/*slider*/
+#portfolio{position: relative;width: 100%;padding-top: 25px;padding-bottom: 65px;}
+
+#owl-demo .item{position: relative;/* width: 300px; */padding: 30px 0px;/* margin: 10px; */color: #FFF;-webkit-border-radius: 3px;-moz-border-radius: 3px;border-radius: 3px;text-align: center;}
+/*akhir slider*/
+
+#contact{
+background-image: url("../img/coverKontak.jpg");
+background-repeat: no-repeat;
+background-size: cover;
+min-height: 725px;
+}
+
+.container-contact{ background-color: rgba(41, 37, 98, 0.7); height: 725px; }
+
+.icon-kontak img {
+  margin-top: 50%;
+  margin-left: 50%;
+  transform: translate(-50%, -50%);
+  width: 75%;
+}
+
+.icon-kontak { height: 100px; }
+
+.list-kontak {
+  margin-top: 50%;
+  margin-left: 15%;
+  transform: translate(-5%, -50%);
+  width: 100%;
+}
+
+.item-kontak i {
+  font-size: 41px;
+  color: #27c0d2;
+  margin-right: 35px;
+}
+
+i.fa.fa-envelope { font-size: 36px; }
+
+.item-kontak { margin: 15px; }
+
+.item-kontak span { color: #fff; font-size: 21px; }
+
+footer {
+  width: 100%;
+  height: 45px;
+  background-color: #292562;
+  overflow: hidden;
+}
+
+footer p {
+  color: rgb(161, 161, 161);
+  line-height: 45px;
+  font-size: 15px;
+}
+
+.carousel-caption {
+  top: 125px;
+  position: relative;
+  right: 0%;
+  left: 0%;
+}
+
+.carousel-caption h1 {
+    color: #27c0d2;
+}
+
+.carousel-caption p { color: black; font-size: 21px; }
+
+.carousel-inner .item img {
+  float: left;
+  width: 50%;
+}
+
+.menu-smarthphone { display: none; }
+
+.owl-theme .owl-controls .owl-buttons div {
+    border-radius: 3px;
+    font-size: 25px;
+}
+
+.owl-theme .owl-controls .owl-buttons div:hover{
+  background-color: #ee2760;
+}
+
+
+a.btn-selengkapnya {
+    /* display: inline-block; */
+    /* text-align: center; */
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    padding: 5px 11px;
+    margin-top: 15px;
+    border: 2px solid;
+    border-radius: 5px;
+}
+
+
+a.link-pindah {
+    color: #ee2760;
+    font-size: 21px;
+}
+
+a.link-pindah:hover{
+  color: #202032;
+}
+
+
+.item a {
+    line-height: 303px;
+    color: white;
+    font-size: 21px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(238, 39, 96, 0.7);
+    width: 270px;
+    height: 303px;
+    display: none;
+}
+
+.item:hover a{
+  display: block;
+}
+
+
+.why-us a {
+    position: absolute;
+    bottom: 21%;
+    left: 50%;
+    z-index: 888;
+    transform: translate(-50%, 5%);
+    color:#ffffff;
+    background-color: rgba(41, 37, 98, 0.59);
+    padding: 9px 15px;
+    border: 2px solid #ffffff;
+    border-radius: 5px;
+    font-size: 19px;
+}
+
+.why-us a:hover{
+  color:rgb(39, 192, 210);
+  background-color: #ffffff;
+}
+
+#login{
+  width: 100%;
+  min-height: 100px;
+}
+
+
+#login img, #register img {
+    position: absolute;
+    width: 100%;
+    height: 95%;
+    bottom: 0;
+}
+
+.social-login .btn{ width: 100%; margin-bottom: 15px;}
+
+#register .btn {
+  width: 100%;
+  /* margin-left: 16px; */
+}
+
+.social-login .btn i { font-size: 21px;}
+
+
+#login hr, #register hr {
+    margin: 0 auto 25px auto;
+}
+
+#login .fa, #register .fa{margin-right: 15px;}
+
+.form-group sup{
+  color: red;
+  font-size: 21px;
+}
+
+
+@media only screen and (max-width:991px){
+.icon-kontak img {
+  margin-top: 127px;
+  margin-left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+}
+
+  .content-landing h1, .content-landing p{ text-align: center; font-size: 41px}
+  .content-landing p{font-size: 19px}
+
+.section-roket{  display: none; }
+
+.jumbotron{ height: 650px; }
+
+}
+
+@media only screen and (max-width:768px){
+.jumbotron{ height: 600px; }
+
+nav{display: block;}
+
+nav ul a li{ display: none;}
+
+.section-roket{display: none; }
+
+#about{min-height: 785px; }
+
+header i.fa.fa-bars{display: block;}
+
+.menu-smarthphone {
+    position: fixed;
+    background: linear-gradient(#292562, #ee2760);
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+}
+
+.menu-smarthphone ul a li {
+    width: 100%;
+    height: 45px;
+    color: white;
+    font-size: 21px;
+    border-bottom: 2px solid;
+    margin-bottom: 7px;
+    z-index: 999
+}
+
+ul.biru-primary, .menu-smarthphone ul a li {
+    padding: 0px;
+}
+.btn-close i.fa.fa-times-circle {font-size: 35px; margin-top: 15px; color: white;}
+
+.icon-kontak img{ width: 250px; margin-top: 145px;}
+
+.list-kontak{ margin-top: 25px;}
+
+.carousel-inner .item img{display: block;float: none; width: 80%; margin: 0 auto;}
+
+.carousel-caption{top:-50px; padding-top: 5px;}
+
+.icon-kontak{height: auto;}
+
+}
+
+@media only screen and (max-width:480px){
+  .item-kontak span {
+    color: #fff;
+    font-size: 16px;
+}
+  .item-kontak i, i.fa.fa-envelope{
+    font-size: 16px;
+  }
+
+  .why-us a{
+    font-size: 15px;
+  }
+  .service-item img{
+    display: block;
+    margin:0 auto;
+    width: 90%;
+  }
+
+  #slide{
+    min-height: 60px
+  }
+
+  #login img, #register img{
+    height: 300px;
+  }
+
+  #register form a{
+    text-align: center;
+    display: block;
+    margin-top: 15px;
+  }
+
+}
+
+
+#page-404 img {
+    margin-top: 90px;
+    width: 50%;
+}
+
+
+#page-404 h3 {
+    font-size: 35px;
+    color: #ee2760;
+}
+
+#page-404 p {
+    font-size: 19px;
+}
+
+#page-404 a, #aktivasi-akun a {
+    color: white;
+    background: rgb(39, 192, 210);
+    padding: 7px 21px;
+    font-size: 21px;
+    border-radius: 5px;
+}
+
+#aktivasi-akun h3{margin-top: 71px;}
+#aktivasi-akun p{margin-bottom: 35px}
+
+#page-404 a:hover, #aktivasi-akun a:hover {
+  background-color: #58C8D6;
+  rgb(32, 32, 50)
+}
+
+
+#aktivasi-akun hr {
+  width: 99.8%;
+  height: 12px;
+  border: 0;
+  box-shadow: inset 0 12px 12px -12px rgba(32, 32, 50, 0.5);
+}
+
+
+footer.aktivasi-akun i {
+    font-size: 25px;
+    margin-left: 15px;
+    border-radius: 50%;
+    margin-top: 21px;
+}
+
+footer.aktivasi-akun {
+    height: 120px;
+}
+
+

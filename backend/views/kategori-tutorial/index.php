@@ -15,6 +15,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
 CrudAsset::register($this);
 
+$this->registerCss(".modal{overflow: auto}");
+
 ?>
 <div class="kategori-tutorial-index">
     <div id="ajaxCrudDatatable">

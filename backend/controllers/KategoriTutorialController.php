@@ -104,15 +104,19 @@ class KategoriTutorialController extends Controller
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
         
                 ];         
-            }else if($model->load($request->post()) && $model->save()){
-                return [
-                    'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "Create new KategoriTutorial",
-                    'content'=>'<span class="text-success">Create KategoriTutorial success</span>',
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                            Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
-        
-                ];         
+            }else if($model->load($request->post()) && $model->validate()){
+                 if($model->saveUploadedFile() !== false){
+                    $model->save(false);
+                            
+                    return [
+                        'forceReload'=>'#crud-datatable-pjax',
+                        'title'=> "Create new KategoriTutorial",
+                        'content'=>'<span class="text-success">Create KategoriTutorial success</span>',
+                        'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
+            
+                    ];  
+                }       
             }else{           
                 return [
                     'title'=> "Create new KategoriTutorial",
@@ -128,8 +132,12 @@ class KategoriTutorialController extends Controller
             /*
             *   Process for non-ajax request
             */
-            if ($model->load($request->post()) && $model->save()) {
-                return $this->redirect(['view', 'Id' => $model->Id, 'Id_User' => $model->Id_User]);
+            if ($model->load($request->post()) && $model->validate()){
+                 if($model->saveUploadedFile() !== false){
+                    $model->save(false);
+                            
+                    return $this->redirect(['view', 'Id' => $model->Id, 'Id_User' => $model->Id_User]);
+                }
             } else {
                 return $this->render('create', [
                     'model' => $model,

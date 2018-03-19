@@ -3,6 +3,9 @@
 namespace common\models;
 
 use Yii;
+use common\models\SubTutorialText;
+use common\models\SubTutorialTugas;
+use common\models\SubTutorialVideo;
 
 /**
  * This is the model class for table "Tutorial".
@@ -69,4 +72,29 @@ class Tutorial extends \yii\db\ActiveRecord
         return true;
       }
     }
+
+
+    public function afterDelete()
+    {
+        SubTutorialText::deleteAll([
+                            'Id' => $this->Id,
+                            'Id_Kategori' => $this->Id_Kategori,
+                            'Id_User' => $this->Id_User,
+                          
+                        ]);
+        SubTutorialTugas::deleteAll([
+                            'Id' => $this->Id,
+                            'Id_Kategori' => $this->Id_Kategori,
+                            'Id_User' => $this->Id_User,
+                          
+                        ]);
+        SubTutorialVideo::deleteAll([
+                            'Id' => $this->Id,
+                            'Id_Kategori' => $this->Id_Kategori,
+                            'Id_User' => $this->Id_User,
+                          
+                        ]);
+        return true;
+    }
+
 }

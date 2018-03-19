@@ -3,6 +3,10 @@
 namespace common\models;
 
 use Yii;
+use common\models\Tutorial;
+use common\models\SubTutorialText;
+use common\models\SubTutorialTugas;
+use common\models\SubTutorialVideo;
 
 /**
  * This is the model class for table "Kategori_Tutorial".
@@ -29,8 +33,8 @@ class KategoriTutorial extends \yii\db\ActiveRecord
     {
         return [
             [['Id_User', 'Nm_Kategori', 'Status'], 'required'],
-            [['Id_User'], 'integer'],
-            [['Status'], 'string'],
+            [['Id_User', 'Gambar'], 'integer'],
+            [['Status', 'Deskripsi', 'Level'], 'string'],
             [['Nm_Kategori'], 'string', 'max' => 150],
         ];
     }
@@ -47,4 +51,48 @@ class KategoriTutorial extends \yii\db\ActiveRecord
             'Status' => 'Status',
         ];
     }
+
+
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => 'mdm\upload\UploadBehavior',
+                'attribute' => 'file', // required, use to receive input file
+                'savedAttribute' => 'Gambar', // optional, use to link model with saved file.
+                'uploadPath' => '@common/upload/Image_Kategori_Tutorial', // saved directory. default to '@runtime/upload'
+                'autoSave' => true, // when true then uploaded file will be save before ActiveRecord::save()
+                'autoDelete' => true, // when true then uploaded file will deleted before ActiveRecord::delete()
+                'deleteOldFile' => true,
+                'directoryLevel' => 0
+            ],
+        ];
+    }
+
+
+    public function afterDelete()
+    {
+        Tutorial::deleteAll([
+                            'Id_Kategori' => $this->Id,
+                            'Id_User' => $this->Id_User,
+                          
+                        ]);
+        SubTutorialText::deleteAll([
+                            'Id_Kategori' => $this->Id,
+                            'Id_User' => $this->Id_User,
+                          
+                        ]);
+        SubTutorialTugas::deleteAll([
+                            'Id_Kategori' => $this->Id,
+                            'Id_User' => $this->Id_User,
+                          
+                        ]);
+        SubTutorialVideo::deleteAll([
+                            'Id_Kategori' => $this->Id,
+                            'Id_User' => $this->Id_User,
+                          
+                        ]);
+        return true;
+    }
+
 }
