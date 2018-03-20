@@ -20,10 +20,18 @@ return [
             'class' => 'common\componen\Menu',
         ],
 
+        // url ini untk mengakses backend dari frontend        
+        'urlManagerBackEnd' => [
+            'class' => 'yii\web\urlManager',
+            'baseUrl' => '/dashboard',
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+        ],
+        // url ini untk mengakses frontend dari backend
         'urlManagerFrontEnd' => [
             'class' => 'yii\web\urlManager',
             'baseUrl' => '',
-            'enablePrettyUrl' => false,
+            'enablePrettyUrl' => true,
             'showScriptName' => false,
         ],
 

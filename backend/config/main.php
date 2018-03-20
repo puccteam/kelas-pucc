@@ -13,8 +13,14 @@ return [
     'bootstrap' => ['log'],
     'modules' => [],
     'components' => [
-        'request' => [
-            'csrfParam' => '_csrf-backend',
+        'request'=>[
+            'class' => 'common\componen\Request',
+            'web'=> '/backend/web',
+            'adminUrl' => '/dashboard'
+        ],
+        'urlManager' => [
+                'enablePrettyUrl' => true,
+                'showScriptName' => false,
         ],
         // 'user' => [
         //     'identityClass' => 'common\models\User',

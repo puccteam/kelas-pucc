@@ -1,0 +1,26 @@
+Options +FollowSymlinks
+RewriteEngine On
+
+# deal with dashboard first
+RewriteCond %{REQUEST_URI} ^/(dashboard) 
+RewriteRule ^dashboard/assets/(.*)$ backend/web/assets/$1 [L]
+RewriteRule ^dashboard/css/(.*)$ backend/web/css/$1 [L]
+
+RewriteCond %{REQUEST_URI} !^/backend/web/(assets|css)/  
+RewriteCond %{REQUEST_URI} ^/(dashboard)  
+RewriteRule ^.*$ backend/web/index.php [L]
+
+
+RewriteCond %{REQUEST_URI} ^/(assets|css)  
+RewriteRule ^assets/(.*)$ frontend/web/assets/$1 [L]
+RewriteRule ^css/(.*)$ frontend/web/css/$1 [L]
+RewriteRule ^fonts/(.*)$ frontend/web/fonts/$1 [L]
+RewriteRule ^img/(.*)$ frontend/web/img/$1 [L]
+RewriteRule ^js/(.*)$ frontend/web/js/$1 [L]
+RewriteRule ^plugin/(.*)$ frontend/web/plugin/$1 [L]
+
+RewriteCond %{REQUEST_URI} !^/(frontend|backend)/web/(assets|css|fonts|img|js|plugin)/
+RewriteCond %{REQUEST_URI} !index.php
+RewriteCond %{REQUEST_FILENAME} !-f [OR]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^.*$ frontend/web/index.php

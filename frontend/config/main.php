@@ -12,8 +12,13 @@ return [
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
-        'request' => [
-            'csrfParam' => '_csrf-frontend',
+        'request'=>[
+            'class' => 'common\componen\Request',
+            'web'=> '/frontend/web'
+        ],
+        'urlManager' => [
+                'enablePrettyUrl' => true,
+                'showScriptName' => false,
         ],
         // 'user' => [
         //     'identityClass' => 'common\models\User',

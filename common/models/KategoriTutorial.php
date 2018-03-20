@@ -7,6 +7,7 @@ use common\models\Tutorial;
 use common\models\SubTutorialText;
 use common\models\SubTutorialTugas;
 use common\models\SubTutorialVideo;
+use yii\behaviors\SluggableBehavior;
 
 /**
  * This is the model class for table "Kategori_Tutorial".
@@ -66,6 +67,10 @@ class KategoriTutorial extends \yii\db\ActiveRecord
                 'deleteOldFile' => true,
                 'directoryLevel' => 0
             ],
+            [
+                'class' => SluggableBehavior::className(),
+                'attribute' => 'Nm_Kategori',
+            ],
         ];
     }
 
@@ -94,5 +99,15 @@ class KategoriTutorial extends \yii\db\ActiveRecord
                         ]);
         return true;
     }
+
+    // public function behaviors()
+    // {
+    //     return [
+    //         [
+    //             'class' => SluggableBehavior::className(),
+    //             'attribute' => 'Nm_Kategori',
+    //         ],
+    //     ];
+    // }
 
 }
