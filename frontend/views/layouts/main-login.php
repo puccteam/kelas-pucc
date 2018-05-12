@@ -27,7 +27,7 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 
   <div id="login">
-      <img src="img/roket-asap-biru.png" alt="" style="z-index:-1">
+      <img src="../img/roket-asap-biru.png" alt="" style="z-index:-1">
    <!--    <div class="alert alert-success alert-dismissible" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <strong>Registrasi akun anda berhasil</strong> Silahkan cek email anda untuk melakukan aktivasi akun.
@@ -35,7 +35,7 @@ AppAsset::register($this);
     <div class="container">
       <div class="row">
         <div class="col-md-5 col-md-offset-6">
-          <h1 class="text-center">Pucc Learning</h1>
+          <h1 class="text-center">Kelas PUCC</h1>
           <hr>
 <!--           <div class="social-login">
             <button class="btn btn-primary" type="button" name="button">

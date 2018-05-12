@@ -26,6 +26,17 @@ return [
             'baseUrl' => '/dashboard',
             'enablePrettyUrl' => true,
             'showScriptName' => false,
+            'rules' => [                  
+                'profile/<id:[0-9a-zA-Z\-]+>/?' => 'profile/user',
+                'category/<id:\S+>' => 'category/detail',  
+                '<controller:\w+>/<id:\d+>' => '<controller>/view',
+                '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
+                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+                'request-password-reset' => 'site/request-password-reset',
+                'reset-password/<token:\S+>' => 'site/reset-password',  
+                'logout' => 'site/logout',
+                'login' => 'site/login',
+            ]
         ],
         // url ini untk mengakses frontend dari backend
         'urlManagerFrontEnd' => [
@@ -33,6 +44,17 @@ return [
             'baseUrl' => '',
             'enablePrettyUrl' => true,
             'showScriptName' => false,
+            'rules' => [                  
+                'profile/<id:[0-9a-zA-Z\-]+>/?' => 'profile/user',
+                'category/<id:\S+>' => 'category/detail',  
+                '<controller:\w+>/<id:\d+>' => '<controller>/view',
+                '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
+                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+                'request-password-reset' => 'site/request-password-reset',
+                'reset-password/<token:\S+>' => 'site/reset-password',  
+                'logout' => 'site/logout',
+                'login' => 'site/login',
+            ]
         ],
 
         'user' => [

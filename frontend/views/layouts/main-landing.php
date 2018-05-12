@@ -90,8 +90,20 @@ $this->registerJs(
                 <h1 data-aos="fade-right">Pucc Learning</h1>
                 <p data-aos="zoom-in">Belajar ngoding dengan seru dan menyenangkan<br>
                   #pucclearning #pucc</p>
-                  <p>Mulai Belajar Sekarang</p> <a href="<?php echo \Yii::$app->urlManagerFrontEnd->createUrl('site/login'); ?>">Login</a> or 
-                  <a href="<?php echo \Yii::$app->urlManagerFrontEnd->createUrl('site/signup'); ?>">Register</a>
+                  <p>Mulai Belajar Sekarang</p> 
+
+                  <?php
+
+                    if (!Yii::$app->user->identity) {
+                      echo "
+                      <a href=". \Yii::$app->urlManagerFrontEnd->createUrl('site/login').">Login</a> or 
+                      <a href=". \Yii::$app->urlManagerFrontEnd->createUrl('site/signup').">Register</a>
+                      ";
+                    }
+
+                  ?>
+                  
+                
                 </div>
               </div>
           </div>
@@ -126,11 +138,22 @@ $this->registerJs(
               <div class="col-md-9">
                 <nav class="float-right">
                   <ul class="biru-primary">
+
                     <a href="#home" class="page-scroll home"><li>Home</li></a>
                     <a href="#about" class="page-scroll about-us"><li>About Us</li></a>
                     <a href="#service"  class="page-scroll service"><li>Service</li></a>
                     <a href="#portfolio" class="page-scroll portfolio"><li >Portfolio</li></a>
                     <a href="#contact" class="page-scroll contact"><li >Contact</li></a>
+
+                    <?php
+
+                      if (Yii::$app->user->identity) {
+                        echo "
+                        <a href=".\Yii::$app->urlManagerFrontEnd->createUrl('site/logout')." class='page-scroll' data-method='post'><li >Logout</li></a>";
+                      }
+
+                    ?>
+
                   </ul>
                 </nav>
               </div>

@@ -1,0 +1,40 @@
+.list-kelas {
+    border: 1px solid #c7c6c6;
+    padding:  15px;
+    margin-bottom:  15px;
+    border-radius:  5px;
+}
+
+.list-kelas a {
+    background: #6c9bb2;
+    width:  100%;
+    display:  block;
+    padding: 11px 25px;
+    text-align:  center;
+    border-radius: 5px;
+    color:  white;
+    font-size: 17px;
+}
+
+.img-full{
+    width: 100%;
+}
+
+.list-materi-kelas {
+    border-bottom: 1px solid;
+    padding: 5px 21px;
+    /*border-radius: 5px;*/
+    margin-top:  5px;
+}
+
+.img-materi img{
+    width: 75%;
+    display: block;
+    margin: 0 auto;
+}
+
+.list-materi-right{
+    width: 100%;
+    height: 450px;
+    overflow: scroll;
+}

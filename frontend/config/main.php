@@ -14,7 +14,7 @@ return [
     'components' => [
         'request'=>[
             'class' => 'common\componen\Request',
-            'web'=> '/frontend/web'
+            'web'=> '/frontend/web',
         ],
         'urlManager' => [
                 'enablePrettyUrl' => true,

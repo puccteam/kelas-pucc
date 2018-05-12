@@ -20,6 +20,7 @@ class AppAsset extends AssetBundle
         "plugin/owl-carousel/owl.theme.css" ,
         "plugin/aos/dist/aos.css" ,
         "css/style.css",
+        "css/mystyle.css",
     ];
     public $js = [
         "js/jquery.min.js",

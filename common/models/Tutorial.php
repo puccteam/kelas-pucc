@@ -54,12 +54,17 @@ class Tutorial extends \yii\db\ActiveRecord
         ];
     }
 
+    public function getKategoriTutorial()
+    {
+        return $this->hasOne(\common\models\KategoriTutorial::className(), ['Id' => 'Id_Kategori']);
+    }
+
 
     public function setId(){
 
       $data = Tutorial::find()->where([
                                          "Id_Kategori" => $this->Id_Kategori,
-                                          "Id_User" => $this->Id_User,
+                                          // "Id_User" => $this->Id_User,
 
                                       ])->orderBy(['Id'=> SORT_DESC])->one();
 

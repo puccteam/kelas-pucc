@@ -64,12 +64,14 @@ class TutorialTextSearch extends SubTutorialText
 
 
         $request = Yii::$app->request;
+        $id_user = Yii::$app->user->getId();
         $Id = $request->get('Id');
         $Id_Kategori = $request->get('Id_Kategori');
 
         $query->andFilterWhere([
             'Id_Kategori' => $Id_Kategori,
             'Id' => $Id,
+            // 'Id_User' => $id_user;
         ]); 
 
         return $dataProvider;

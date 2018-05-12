@@ -22,7 +22,8 @@
         "hscstudio/yii2-mimin": "~1.1.4",
         "johnitvn/yii2-ajaxcrud": "*",
         "marqu3s/yii2-summernote": "dev-master",
-        "mdmsoft/yii2-upload-file": "~2.0"
+        "mdmsoft/yii2-upload-file": "~2.0",
+        "bupy7/yii2-embed": "@dev"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
