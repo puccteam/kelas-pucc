@@ -38,3 +38,8 @@
     height: 450px;
     overflow: scroll;
 }
+
+.img-profile img {
+    margin-top:  95px;
+    border-radius: 50%;
+}
