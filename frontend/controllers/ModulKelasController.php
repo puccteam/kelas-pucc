@@ -5,7 +5,9 @@ namespace frontend\controllers;
 use Yii;
 use frontend\models\KategoriTutorial;
 use common\models\Tutorial;
+use common\models\TaTutorial;
 use common\models\SubTutorialVideo;
+use common\models\TaBelajar;
 use frontend\models\search\ModulKelasSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -39,7 +41,7 @@ class ModulKelasController extends Controller
      * @return mixed
      */
     public function actionIndex()
-    {    
+    {
         $searchModel = new ModulKelasSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $model = KategoriTutorial::find()->all();
@@ -53,31 +55,87 @@ class ModulKelasController extends Controller
         ]);
     }
 
+    public function actionDaftarKelas($u, $kelas)
+    {
+        $model = new TaTutorial();
+
+        $TaBelajarCheck = TaTutorial::find()->where([
+                                                    'username' => $u,
+                                                    'id_tutorial' => $kelas,
+                                                  ])->exists();
+
+        if (!$TaBelajarCheck ) {
+          // die('hai');
+          $model->username = $u;
+          $model->id_tutorial = $kelas;
+          $model->save();
+        }
+
+         // $this->layout = 'main-kelas';
+
+        return $this->redirect(['kelas', 'id' => $kelas]);
+    }
+
     public function actionKelas($id, $tutorial = null)
-    {    
+    {
         $this->layout = 'main-kelas';
         $searchModel = new ModulKelasSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $model = Tutorial::find()->where(['id_kategori' => $id])->all();
         $modelKategori = KategoriTutorial::find()->where(['Id' => $id])->one();
+        $TaBelajar = new TaBelajar();
+
+        $username = Yii::$app->user->identity->username;
+
+        $TaBelajarCheck = TaBelajar::find()->where([
+                                                    'username' => $username,
+                                                    'id_tutorial' => $id,
+                                                    'id_materi' => $tutorial
+                                                  ])->exists();
+
+        $checTutorial = TaTutorial::find()->where([
+                                                'username' => $username,
+                                                'id_tutorial' => $id
+                                              ])->exists();
+
 
         if ($tutorial != null) {
-            $modelMateri = SubTutorialVideo::find()->where(['id_kategori' => $id, 'Id' => $tutorial])->one();
-            return $this->render('index-materi', [
-                'model' => $model,
-                'modelKategori' => $modelKategori,
-                'modelMateri' => $modelMateri,
-            ]);
+            if (!$checTutorial) {
+                Yii::$app->session->setFlash('warning', "Silahkan Daftar Kelas Ini Terlebih Dahulu");
+
+
+              return $this->render('index-kelas', [
+                  'model' => $model,
+                  'modelKategori' => $modelKategori,
+              ]);
+            }else{
+              $modelMateri = SubTutorialVideo::find()->where(['id_kategori' => $id, 'Id' => $tutorial])->one();
+
+              if (!$TaBelajarCheck) {
+                $TaBelajar->username = $username;
+                $TaBelajar->id_tutorial = $id;
+                $TaBelajar->id_materi = $tutorial;
+                $TaBelajar->save();
+              }
+
+              return $this->render('index-materi', [
+                  'model' => $model,
+                  'modelKategori' => $modelKategori,
+                  'modelMateri' => $modelMateri,
+              ]);
+            }
+
         }else{
+
             return $this->render('index-kelas', [
                 'model' => $model,
                 'modelKategori' => $modelKategori,
-            ]);  
+            ]);
         }
 
-         
 
-        
+
+
     }
 
 
@@ -88,7 +146,7 @@ class ModulKelasController extends Controller
      * @return mixed
      */
     public function actionView($Id, $Id_User)
-    {   
+    {
         $request = Yii::$app->request;
         if($request->isAjax){
             Yii::$app->response->format = Response::FORMAT_JSON;
@@ -99,7 +157,7 @@ class ModulKelasController extends Controller
                     ]),
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                             Html::a('Edit',['update','Id, $Id_User'=>$Id, $Id_User],['class'=>'btn btn-primary','role'=>'modal-remote'])
-                ];    
+                ];
         }else{
             return $this->render('view', [
                 'model' => $this->findModel($Id, $Id_User),
@@ -116,7 +174,7 @@ class ModulKelasController extends Controller
     public function actionCreate()
     {
         $request = Yii::$app->request;
-        $model = new KategoriTutorial();  
+        $model = new KategoriTutorial();
 
         if($request->isAjax){
             /*
@@ -131,8 +189,8 @@ class ModulKelasController extends Controller
                     ]),
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
-        
-                ];         
+
+                ];
             }else if($model->load($request->post()) && $model->save()){
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
@@ -140,9 +198,9 @@ class ModulKelasController extends Controller
                     'content'=>'<span class="text-success">Create KategoriTutorial success</span>',
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                             Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
-        
-                ];         
-            }else{           
+
+                ];
+            }else{
                 return [
                     'title'=> "Create new KategoriTutorial",
                     'content'=>$this->renderAjax('create', [
@@ -150,8 +208,8 @@ class ModulKelasController extends Controller
                     ]),
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
-        
-                ];         
+
+                ];
             }
         }else{
             /*
@@ -165,7 +223,7 @@ class ModulKelasController extends Controller
                 ]);
             }
         }
-       
+
     }
 
     /**
@@ -179,7 +237,7 @@ class ModulKelasController extends Controller
     public function actionUpdate($Id, $Id_User)
     {
         $request = Yii::$app->request;
-        $model = $this->findModel($Id, $Id_User);       
+        $model = $this->findModel($Id, $Id_User);
 
         if($request->isAjax){
             /*
@@ -194,7 +252,7 @@ class ModulKelasController extends Controller
                     ]),
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
-                ];         
+                ];
             }else if($model->load($request->post()) && $model->save()){
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
@@ -204,7 +262,7 @@ class ModulKelasController extends Controller
                     ]),
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                             Html::a('Edit',['update','Id, $Id_User'=>$Id, $Id_User],['class'=>'btn btn-primary','role'=>'modal-remote'])
-                ];    
+                ];
             }else{
                  return [
                     'title'=> "Update KategoriTutorial #".$Id, $Id_User,
@@ -213,7 +271,7 @@ class ModulKelasController extends Controller
                     ]),
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
-                ];        
+                ];
             }
         }else{
             /*
@@ -267,7 +325,7 @@ class ModulKelasController extends Controller
      * @return mixed
      */
     public function actionBulkDelete()
-    {        
+    {
         $request = Yii::$app->request;
         $pks = explode(',', $request->post( 'pks' )); // Array or selected records primary keys
         foreach ( $pks as $pk ) {
@@ -287,7 +345,7 @@ class ModulKelasController extends Controller
             */
             return $this->redirect(['index']);
         }
-       
+
     }
 
     /**

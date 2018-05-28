@@ -59,6 +59,12 @@ class Tutorial extends \yii\db\ActiveRecord
         return $this->hasOne(\common\models\KategoriTutorial::className(), ['Id' => 'Id_Kategori']);
     }
 
+    public function getTaBelajar()
+    {
+        $username = Yii::$app->user->identity->username;
+        return $this->hasOne(\common\models\TaBelajar::className(), ['id_tutorial' => 'Id_Kategori', 'id_materi' => 'Id'])->andWhere(['username' => $username, ])->exists();
+    }
+
 
     public function setId(){
 
@@ -85,19 +91,19 @@ class Tutorial extends \yii\db\ActiveRecord
                             'Id' => $this->Id,
                             'Id_Kategori' => $this->Id_Kategori,
                             'Id_User' => $this->Id_User,
-                          
+
                         ]);
         SubTutorialTugas::deleteAll([
                             'Id' => $this->Id,
                             'Id_Kategori' => $this->Id_Kategori,
                             'Id_User' => $this->Id_User,
-                          
+
                         ]);
         SubTutorialVideo::deleteAll([
                             'Id' => $this->Id,
                             'Id_Kategori' => $this->Id_Kategori,
                             'Id_User' => $this->Id_User,
-                          
+
                         ]);
         return true;
     }

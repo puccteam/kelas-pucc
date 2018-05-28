@@ -26,6 +26,14 @@ position: relative;
 background-attachment: fixed;
 }
 
+.jumbotron-header{
+  background: url("../img/background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* width: 100%; */
+  /* background-position: 50% 10%; */
+}
+
 .content-landing{
 position: absolute;
 top: 100px;
@@ -498,5 +506,3 @@ footer.aktivasi-akun i {
 footer.aktivasi-akun {
     height: 120px;
 }
-
-

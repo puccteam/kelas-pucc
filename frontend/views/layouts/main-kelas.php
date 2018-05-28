@@ -46,7 +46,20 @@ AppAsset::register($this);
                 <a href="index.html#service"  class="page-scroll service"><li>Service</li></a>
                 <a href="index.html#portfolio" class="page-scroll portfolio"><li >Portfolio</li></a>
                 <a href="index.html#contact" class="page-scroll contact"><li >Contact</li></a> -->
-                <?= Html::a('<li>Logout</li>', Url::to(['site/logout']), ['data-method' => 'POST', 'class' => 'page-scroll']) ?>
+                <a href="<?= \Yii::$app->urlManagerFrontEnd->createUrl('modul-kelas') ?>" class='page-scroll' data-method='post'><li >Kelas</li></a>
+
+
+                <?php
+
+                  if (Yii::$app->user->identity) {
+
+                    echo "<a href=".\Yii::$app->urlManagerFrontEnd->createUrl('profile/?u='.Yii::$app->user->identity->username)." class='page-scroll' data-method='post'><li >Profile</li></a>";
+                    echo "
+                    <a href=".\Yii::$app->urlManagerFrontEnd->createUrl('site/logout')." class='page-scroll' data-method='post'><li >Logout</li></a>";
+
+                  }
+
+                ?>
               </ul>
             </nav>
           </div>
@@ -67,7 +80,20 @@ AppAsset::register($this);
           <a href="index.html#service"  class="page-scroll" onclick="hideMenu()"><li>Service</li></a>
           <a href="index.html#portfolio" class="page-scroll" onclick="hideMenu()"><li >Portfolio</li></a>
           <a href="index.html#contact" class="page-scroll" onclick="hideMenu()"><li >Contact</li></a> -->
-          <?= Html::a('<li>Logout</li>', Url::to(['site/logout']), ['data-method' => 'POST', 'class' => 'page-scroll']) ?>
+          <a href="<?= \Yii::$app->urlManagerFrontEnd->createUrl('modul-kelas') ?>" class='page-scroll' data-method='post'><li >Kelas</li></a>
+
+
+          <?php
+
+            if (Yii::$app->user->identity) {
+
+              echo "<a href=".\Yii::$app->urlManagerFrontEnd->createUrl('profile/?u='.Yii::$app->user->identity->username)." class='page-scroll' data-method='post'><li >Profile</li></a>";
+              echo "
+              <a href=".\Yii::$app->urlManagerFrontEnd->createUrl('site/logout')." class='page-scroll' data-method='post'><li >Logout</li></a>";
+
+            }
+
+          ?>
         </ul>
       </div>
     </div>

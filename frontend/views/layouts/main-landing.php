@@ -90,20 +90,20 @@ $this->registerJs(
                 <h1 data-aos="fade-right">Pucc Learning</h1>
                 <p data-aos="zoom-in">Belajar ngoding dengan seru dan menyenangkan<br>
                   #pucclearning #pucc</p>
-                  <p>Mulai Belajar Sekarang</p> 
+                  <p>Mulai Belajar Sekarang</p>
 
                   <?php
 
                     if (!Yii::$app->user->identity) {
                       echo "
-                      <a href=". \Yii::$app->urlManagerFrontEnd->createUrl('site/login').">Login</a> or 
+                      <a href=". \Yii::$app->urlManagerFrontEnd->createUrl('site/login').">Login</a> or
                       <a href=". \Yii::$app->urlManagerFrontEnd->createUrl('site/signup').">Register</a>
                       ";
                     }
 
                   ?>
-                  
-                
+
+
                 </div>
               </div>
           </div>
@@ -142,14 +142,17 @@ $this->registerJs(
                     <a href="#home" class="page-scroll home"><li>Home</li></a>
                     <a href="#about" class="page-scroll about-us"><li>About Us</li></a>
                     <a href="#service"  class="page-scroll service"><li>Service</li></a>
-                    <a href="#portfolio" class="page-scroll portfolio"><li >Portfolio</li></a>
-                    <a href="#contact" class="page-scroll contact"><li >Contact</li></a>
+                    <a href="<?= \Yii::$app->urlManagerFrontEnd->createUrl('modul-kelas') ?>" class='page-scroll' data-method='post'><li >Kelas</li></a>
+
 
                     <?php
 
                       if (Yii::$app->user->identity) {
+
+                        echo "<a href=".\Yii::$app->urlManagerFrontEnd->createUrl('profile/?u='.Yii::$app->user->identity->username)." class='page-scroll' data-method='post'><li >Profile</li></a>";
                         echo "
                         <a href=".\Yii::$app->urlManagerFrontEnd->createUrl('site/logout')." class='page-scroll' data-method='post'><li >Logout</li></a>";
+
                       }
 
                     ?>
@@ -172,7 +175,6 @@ $this->registerJs(
               <a href="#home"  class="page-scroll" onclick="hideMenu()"><li>Home</li></a>
               <a href="#about" class="page-scroll" onclick="hideMenu()"><li>About Us</li></a>
               <a href="#service"  class="page-scroll" onclick="hideMenu()"><li>Service</li></a>
-              <a href="#portfolio" class="page-scroll" onclick="hideMenu()"><li >Portfolio</li></a>
               <a href="#contact" class="page-scroll" onclick="hideMenu()"><li >Contact</li></a>
             </ul>
           </div>
@@ -331,7 +333,7 @@ $this->registerJs(
               <div class="row">
                 <div class="col-md-6">
                   <div class="icon-kontak">
-                    <img src="img/roket2.png" alt="roket medandigi">
+                    <img src="img/roket2.png" alt="roket PuccLearning">
                   </div>
                 </div>
 
@@ -342,16 +344,16 @@ $this->registerJs(
                       <i class="fa fa-phone-square" aria-hidden="true"></i><span>0123456789</span>
                     </div>
                     <div class="item-kontak">
-                      <i class="fa fa-envelope" aria-hidden="true"></i><span>medandigi.team@gmail.com</span>
+                      <i class="fa fa-envelope" aria-hidden="true"></i><span>PuccLearning.team@gmail.com</span>
                     </div>
                     <div class="item-kontak">
-                      <i class="fa fa-facebook-official" aria-hidden="true"></i><span>Medandigi</span>
+                      <i class="fa fa-facebook-official" aria-hidden="true"></i><span>PuccLearning</span>
                     </div>
                     <div class="item-kontak">
-                      <i class="fa fa-twitter-square" aria-hidden="true"></i><span>@medandigi</span>
+                      <i class="fa fa-twitter-square" aria-hidden="true"></i><span>@PuccLearning</span>
                     </div>
                     <div class="item-kontak">
-                      <i class="fa fa-instagram"  aria-hidden="true"></i><span>@medandigi</span>
+                      <i class="fa fa-instagram"  aria-hidden="true"></i><span>@PuccLearning</span>
                     </div>
 
                   </div>
@@ -366,7 +368,7 @@ $this->registerJs(
         <!-- Footer -->
         <footer>
           <div class="container">
-            <p>&copyCopyright MedanDigi 2017 || Di <i class="fa fa-code" aria-hidden="true"></i> dengan <i class="fa fa-heart" aria-hidden="true"></i></p>
+            <p>&copyCopyright PuccLearning 2017 || Di <i class="fa fa-code" aria-hidden="true"></i> dengan <i class="fa fa-heart" aria-hidden="true"></i></p>
           </div>
         </footer>
         <!-- Akhir Footer -->

@@ -1,3 +1,13 @@
+@font-face {
+        font-family: "Ubuntu";
+        src: url('../fonts/Ubuntu-Light.TTF');
+        }
+
+*{
+  font-family: Ubuntu, sans-serif;
+}
+
+
 .list-kelas {
     border: 1px solid #c7c6c6;
     padding:  15px;
